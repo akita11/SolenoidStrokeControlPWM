@@ -2,7 +2,7 @@
 
 // PortB: 36/26/V/G
 #define PIN_PWM 26 // PortB
-#define PIN_ADC 36 // PortB / Vsol=12V / divider=4
+#define PIN_ADC 36 // PortB / 1/5 of Voltage at "S" of nMOS (Vsol=12V)
 
 void setup() {
   M5.begin();
