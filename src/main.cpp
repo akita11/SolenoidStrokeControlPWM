@@ -8,6 +8,13 @@
 Ticker tickerSet;
 volatile int duty = 0;
 
+// Ls        Rs  Ls/Rs Tsim   Tmeas@12V        
+// 30mH-27mH 12  2.5m  7m     30ms LongStroke
+// 80mH-64mH 220 0.3m  1.5m   5ms  CBS07302300
+// 20mH-16mH 60  0.3m  1m     5ms  CBS07300580 
+// 25mH-31mH 11  3m    8m     10ms CBS10290100
+// 14mH-17mH 8                     5V solenoid
+
 // every 100ms
 void IRAM_ATTR onTimer()
 {
@@ -71,13 +78,17 @@ void loop()
     printf("pos_t=%d\n", pos_t);
   }
 
-  duty = 80; // [%]
+  duty = 20; // [%]
 
+  ledcWrite(0, 1023);
+  delay(80);
+  ledcWrite(0, 0);
+  delay(20);
+/*
   int pos;
   // PWM drive
   ledcWrite(0, (int)((float)duty / 100.0 * 1024)); // set duty
   delay(100);
-
   // position measure
   // Solenoid ON for 10ms
   ledcWrite(0, 1023); // ON
@@ -142,4 +153,5 @@ void loop()
 //      delay(t_on_tran / 1000);
     }
   }
+*/
 }
